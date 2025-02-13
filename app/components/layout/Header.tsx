@@ -40,11 +40,15 @@ export default function Header() {
 
   return (
     <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
-      <div className="container mx-auto px-6 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 backdrop-blur-sm ${
+        isScrolled ? 'bg-white/20' : 'bg-white/5'
+      }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-3xl">🎬</span>
-            <span className="text-2xl font-bold font-outfit text-white">
+            <span className={`text-2xl font-bold font-outfit ${
+              isScrolled ? 'text-gray-800' : 'text-white'
+            }`}>
               Vidsource
             </span>
           </Link>
@@ -55,7 +59,9 @@ export default function Header() {
               <Link 
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-all hover:text-blue-500 text-white ${
+                className={`font-medium transition-all hover:text-blue-500 ${
+                  isScrolled ? 'text-gray-700' : 'text-white'
+                } ${
                   activeSection === item.href.slice(1) ? 'text-blue-500' : ''
                 }`}
               >
@@ -71,7 +77,7 @@ export default function Header() {
             aria-label="Toggle menu"
           >
             <svg
-              className="w-6 h-6 text-white"
+              className={`w-6 h-6 ${isScrolled ? 'text-gray-800' : 'text-white'}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -109,7 +115,9 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm ${
+        <div className={`md:hidden mt-4 rounded-xl border border-white/10 backdrop-blur-sm ${
+          isScrolled ? 'bg-white/20' : 'bg-white/5'
+        } ${
           isMobileMenuOpen ? 'block' : 'hidden'
         }`}>
           <nav className="py-4 flex flex-col space-y-4">
@@ -118,7 +126,9 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-medium px-4 py-2 rounded-lg transition-colors text-white hover:bg-white/10 ${
+                className={`font-medium px-4 py-2 rounded-lg transition-colors ${
+                  isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+                } ${
                   activeSection === item.href.slice(1) ? 'text-blue-500' : ''
                 }`}
               >
