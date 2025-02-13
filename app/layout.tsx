@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Outfit, Inter } from 'next/font/google';
-import LenisProvider from './components/providers/LenisProvider';
+import LocomotiveScrollProvider from './components/providers/LocomotiveScrollProvider';
 import './globals.css';
 
 // Font optimization
@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
       <body className={`${inter.className} antialiased`}>
-        <LenisProvider>{children}</LenisProvider>
+        <LocomotiveScrollProvider>{children}</LocomotiveScrollProvider>
       </body>
     </html>
   );
