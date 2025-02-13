@@ -40,8 +40,10 @@ export default function Header() {
 
   return (
     <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
-      <div className={`container mx-auto px-6 py-4 rounded-2xl ${
-        isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'
+      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 ${
+        isScrolled 
+          ? 'bg-white/80 backdrop-blur-md shadow-sm' 
+          : 'bg-white/5 backdrop-blur-sm'
       }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -115,9 +117,9 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 rounded-xl ${
+        <div className={`md:hidden mt-4 rounded-xl border border-white/10 ${
           isMobileMenuOpen ? 'block' : 'hidden'
-        } ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent/50 backdrop-blur-sm'}`}>
+        } ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-white/5 backdrop-blur-sm'}`}>
           <nav className="py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link
