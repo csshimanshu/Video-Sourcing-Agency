@@ -40,8 +40,8 @@ export default function Header() {
 
   return (
     <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
-      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${
-        isScrolled ? 'bg-white/20' : 'bg-white/5'
+      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
+        isScrolled ? 'bg-white/30' : 'bg-white/10'
       }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -115,8 +115,8 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 rounded-xl border border-white/10 backdrop-blur-sm shadow-[0_4px_20px_rgb(0,0,0,0.1)] ${
-          isScrolled ? 'bg-white/20' : 'bg-white/5'
+        <div className={`md:hidden mt-4 rounded-xl border border-white/10 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
+          isScrolled ? 'bg-white/30' : 'bg-white/10'
         } ${
           isMobileMenuOpen ? 'block' : 'hidden'
         }`}>
