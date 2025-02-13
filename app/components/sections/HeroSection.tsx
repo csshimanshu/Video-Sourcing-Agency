@@ -1,6 +1,62 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+function Counter({ end, duration = 2000, label }: { end: number, duration?: number, label: string }) {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(count);
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    countRef.current = count;
+    const startTime = Date.now();
+    const startValue = countRef.current;
+
+    const updateCount = () => {
+      const elapsedTime = Date.now() - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+
+      if (progress < 1) {
+        const nextCount = Math.floor(startValue + (end - startValue) * progress);
+        setCount(nextCount);
+        requestAnimationFrame(updateCount);
+      } else {
+        setCount(end);
+      }
+    };
+
+    requestAnimationFrame(updateCount);
+  }, [end, duration, isVisible]);
+
+  return (
+    <div ref={elementRef} className="text-center">
+      <div className="text-3xl md:text-4xl font-bold text-blue-400">
+        {count}{label.includes('Support') ? '/7' : label.includes('Satisfaction') ? '%' : '+'}
+      </div>
+      <div className="text-sm md:text-base text-gray-300">{label}</div>
+    </div>
+  );
+}
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,6 +64,13 @@ export default function HeroSection() {
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const stats = [
+    { value: 500, label: 'Videos Edited' },
+    { value: 100, label: 'Happy Creators' },
+    { value: 24, label: 'Support' },
+    { value: 100, label: 'Satisfaction' }
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-800 overflow-hidden">
@@ -44,16 +107,13 @@ export default function HeroSection() {
           
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-white max-w-4xl mx-auto">
-            {[
-              { value: '500+', label: 'Videos Edited' },
-              { value: '100+', label: 'Happy Creators' },
-              { value: '24/7', label: 'Support' },
-              { value: '100%', label: 'Satisfaction' },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-400">{stat.value}</div>
-                <div className="text-sm md:text-base text-gray-300">{stat.label}</div>
-              </div>
+            {stats.map((stat, index) => (
+              <Counter 
+                key={index} 
+                end={stat.value} 
+                duration={2000} 
+                label={stat.label}
+              />
             ))}
           </div>
         </div>
