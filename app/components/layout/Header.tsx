@@ -40,15 +40,13 @@ export default function Header() {
 
   return (
     <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
-      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
-        isScrolled ? 'bg-white/30' : 'bg-white/10'
+      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/20 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
+        isScrolled ? 'bg-blue-600/40' : 'bg-blue-600/20'
       }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-3xl">🎬</span>
-            <span className={`text-2xl font-bold font-outfit ${
-              isScrolled ? 'text-gray-800' : 'text-white'
-            }`}>
+            <span className="text-2xl font-bold font-outfit text-white">
               Vidsource
             </span>
           </Link>
@@ -59,10 +57,8 @@ export default function Header() {
               <Link 
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-all hover:text-blue-500 ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
-                } ${
-                  activeSection === item.href.slice(1) ? 'text-blue-500' : ''
+                className={`font-medium transition-all text-white hover:text-blue-100 ${
+                  activeSection === item.href.slice(1) ? 'text-blue-200' : ''
                 }`}
               >
                 {item.name}
@@ -77,7 +73,7 @@ export default function Header() {
             aria-label="Toggle menu"
           >
             <svg
-              className={`w-6 h-6 ${isScrolled ? 'text-gray-800' : 'text-white'}`}
+              className="w-6 h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -115,8 +111,8 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 rounded-xl border border-white/10 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
-          isScrolled ? 'bg-white/30' : 'bg-white/10'
+        <div className={`md:hidden mt-4 rounded-xl border border-white/20 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
+          isScrolled ? 'bg-blue-600/40' : 'bg-blue-600/20'
         } ${
           isMobileMenuOpen ? 'block' : 'hidden'
         }`}>
@@ -126,10 +122,8 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-medium px-4 py-2 rounded-lg transition-colors ${
-                  isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
-                } ${
-                  activeSection === item.href.slice(1) ? 'text-blue-500' : ''
+                className={`font-medium px-4 py-2 rounded-lg transition-colors text-white hover:bg-white/10 ${
+                  activeSection === item.href.slice(1) ? 'text-blue-200' : ''
                 }`}
               >
                 {item.name}
