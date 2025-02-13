@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Outfit, Inter } from 'next/font/google';
-import LocomotiveScrollProvider from './components/providers/LocomotiveScrollProvider';
 import './globals.css';
-import './locomotive-scroll.css';
 
 // Font optimization
 const outfit = Outfit({
@@ -35,9 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`scroll-smooth ${outfit.variable} ${inter.variable}`}>
       <body className={`${inter.className} antialiased`}>
-        <LocomotiveScrollProvider>{children}</LocomotiveScrollProvider>
+        {children}
       </body>
     </html>
   );
