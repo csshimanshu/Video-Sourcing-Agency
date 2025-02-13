@@ -98,7 +98,7 @@ export default function Header() {
                 isScrolled ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'
               }`}
             >
-              Get Started
+              Contact Us
             </button>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function Header() {
               }}
               className="btn-primary mx-4"
             >
-              Get Started
+              Contact Us
             </button>
           </nav>
         </div>
