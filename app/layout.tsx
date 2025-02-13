@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Outfit, Inter } from 'next/font/google';
+import LenisProvider from './components/providers/LenisProvider';
 import './globals.css';
 
 // Font optimization
@@ -33,8 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${outfit.variable} ${inter.variable}`}>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+      <body className={`${inter.className} antialiased`}>
+        <LenisProvider>{children}</LenisProvider>
+      </body>
     </html>
   );
 }
