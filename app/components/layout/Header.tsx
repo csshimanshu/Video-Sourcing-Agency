@@ -39,10 +39,12 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg py-2' : 'bg-transparent py-4'
+    <header className={`fixed w-full z-50 transition-all duration-300 px-4 ${
+      isScrolled ? 'top-4' : 'top-0'
     }`}>
-      <div className="container">
+      <div className={`container mx-auto transition-all duration-300 ${
+        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg rounded-2xl py-4 px-6' : 'bg-transparent py-6 px-6'
+      }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-3xl">🎬</span>
@@ -104,9 +106,9 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        <div className={`md:hidden transition-all duration-300 ease-in-out mt-4 ${
           isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden`}>
+        } overflow-hidden ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg rounded-xl p-4' : 'bg-transparent'}`}>
           <nav className="py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link

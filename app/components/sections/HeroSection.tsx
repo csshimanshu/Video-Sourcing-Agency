@@ -23,7 +23,7 @@ export default function HeroSection() {
       <div className={`container mx-auto px-4 z-10 text-center transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
         <div className="space-y-6">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Elevate Your <span className="text-blue-400">YouTube Channel</span><br />
+            Elevate Your <span className="text-blue-400">YouTube</span><br />
             with Vidsource
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
