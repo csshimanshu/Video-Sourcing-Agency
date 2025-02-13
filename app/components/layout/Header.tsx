@@ -40,8 +40,8 @@ export default function Header() {
 
   return (
     <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
-      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/20 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
-        isScrolled ? 'bg-blue-600/40' : 'bg-blue-600/20'
+      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
+        isScrolled ? 'bg-gray-900/75' : 'bg-gray-800/50'
       }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -57,8 +57,8 @@ export default function Header() {
               <Link 
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-all text-white hover:text-blue-100 ${
-                  activeSection === item.href.slice(1) ? 'text-blue-200' : ''
+                className={`font-medium transition-all text-gray-200 hover:text-white ${
+                  activeSection === item.href.slice(1) ? 'text-white' : ''
                 }`}
               >
                 {item.name}
@@ -103,7 +103,7 @@ export default function Header() {
                 const element = document.getElementById('contact');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="btn-primary bg-white text-blue-500"
+              className="btn-primary bg-white text-gray-900 hover:bg-gray-100"
             >
               Contact Us
             </button>
@@ -111,8 +111,8 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 rounded-xl border border-white/20 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
-          isScrolled ? 'bg-blue-600/40' : 'bg-blue-600/20'
+        <div className={`md:hidden mt-4 rounded-xl border border-white/10 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
+          isScrolled ? 'bg-gray-900/75' : 'bg-gray-800/50'
         } ${
           isMobileMenuOpen ? 'block' : 'hidden'
         }`}>
@@ -122,8 +122,8 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-medium px-4 py-2 rounded-lg transition-colors text-white hover:bg-white/10 ${
-                  activeSection === item.href.slice(1) ? 'text-blue-200' : ''
+                className={`font-medium px-4 py-2 rounded-lg transition-colors text-gray-200 hover:text-white hover:bg-white/5 ${
+                  activeSection === item.href.slice(1) ? 'text-white' : ''
                 }`}
               >
                 {item.name}
@@ -135,7 +135,7 @@ export default function Header() {
                 const element = document.getElementById('contact');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="btn-primary mx-4"
+              className="btn-primary mx-4 bg-white text-gray-900 hover:bg-gray-100"
             >
               Contact Us
             </button>
