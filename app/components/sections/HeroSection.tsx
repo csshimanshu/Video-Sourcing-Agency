@@ -33,21 +33,12 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
               onClick={() => {
-                const element = document.getElementById('services');
+                const element = document.getElementById('contact');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="bg-blue-500 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-600 transition-all hover:scale-105 transform"
             >
-              Get Started
-            </button>
-            <button 
-              onClick={() => {
-                const element = document.getElementById('pricing');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all"
-            >
-              View Pricing
+              Contact Us
             </button>
           </div>
           
