@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Outfit, Inter } from 'next/font/google';
 import LocomotiveScrollProvider from './components/providers/LocomotiveScrollProvider';
 import './globals.css';
+import './locomotive-scroll.css';
 
 // Font optimization
 const outfit = Outfit({

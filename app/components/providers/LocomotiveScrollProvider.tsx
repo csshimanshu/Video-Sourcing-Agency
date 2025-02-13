@@ -2,7 +2,6 @@
 
 import { ReactNode, useEffect, useRef } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
-import '../styles/locomotive-scroll.css';
 
 export default function LocomotiveScrollProvider({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
