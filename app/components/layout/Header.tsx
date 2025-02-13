@@ -39,11 +39,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 px-4 ${
-      isScrolled ? 'top-4' : 'top-0'
-    }`}>
-      <div className={`container mx-auto transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg rounded-2xl py-4 px-6' : 'bg-transparent py-6 px-6'
+    <header className="fixed w-full z-50 top-0">
+      <div className={`container mx-auto px-6 py-4 ${
+        isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'
       }`}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -76,17 +74,28 @@ export default function Header() {
             className="md:hidden p-2"
             aria-label="Toggle menu"
           >
-            <div className={`w-6 h-5 relative transform transition-all duration-300 ${isMobileMenuOpen ? 'rotate-180' : ''}`}>
-              <span className={`absolute h-0.5 w-full bg-current transform transition-all duration-300 ${
-                isScrolled ? 'bg-gray-800' : 'bg-white'
-              } ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : '-translate-y-2'}`}></span>
-              <span className={`absolute h-0.5 w-full bg-current transform transition-all duration-300 ${
-                isScrolled ? 'bg-gray-800' : 'bg-white'
-              } ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-              <span className={`absolute h-0.5 w-full bg-current transform transition-all duration-300 ${
-                isScrolled ? 'bg-gray-800' : 'bg-white'
-              } ${isMobileMenuOpen ? '-rotate-45 translate-y-2' : 'translate-y-2'}`}></span>
-            </div>
+            <svg
+              className={`w-6 h-6 ${isScrolled ? 'text-gray-800' : 'text-white'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
           </button>
 
           {/* CTA Button */}
@@ -106,9 +115,9 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out mt-4 ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg rounded-xl p-4' : 'bg-transparent'}`}>
+        <div className={`md:hidden mt-4 ${
+          isMobileMenuOpen ? 'block' : 'hidden'
+        } ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'}`}>
           <nav className="py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link
