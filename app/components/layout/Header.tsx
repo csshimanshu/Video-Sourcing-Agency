@@ -39,8 +39,8 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed w-full z-50 top-0">
-      <div className={`container mx-auto px-6 py-4 ${
+    <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
+      <div className={`container mx-auto px-6 py-4 rounded-2xl ${
         isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'
       }`}>
         <div className="flex justify-between items-center">
@@ -115,9 +115,9 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 ${
+        <div className={`md:hidden mt-4 rounded-xl ${
           isMobileMenuOpen ? 'block' : 'hidden'
-        } ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'}`}>
+        } ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent/50 backdrop-blur-sm'}`}>
           <nav className="py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link
