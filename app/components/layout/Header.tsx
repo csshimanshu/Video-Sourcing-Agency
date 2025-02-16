@@ -1,12 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useContactForm } from '../providers/ContactFormProvider';
 
 const navItems = [
-  { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
   { name: 'Portfolio', href: '#portfolio' },
-  { name: 'Contact', href: '#contact' }
+  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'About', href: '#about' }
 ];
 
 export default function Header() {
@@ -38,9 +39,11 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const { openContactForm } = useContactForm();
+
   return (
     <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
-      <div className={`container mx-auto px-6 py-4 rounded-2xl border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
+      <div className={`container mx-auto px-6 py-2 rounded-3xl border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
         isScrolled ? 'bg-gray-900/75' : 'bg-gray-800/50'
       }`}>
         <div className="flex justify-between items-center">
@@ -54,15 +57,20 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link 
+              <button 
                 key={item.name}
-                href={item.href}
-                className={`font-medium transition-all text-gray-200 hover:text-white ${
+                onClick={() => {
+                  const element = document.getElementById(item.href.slice(1));
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className={`font-medium relative transition-all text-gray-200 hover:text-white group ${
                   activeSection === item.href.slice(1) ? 'text-white' : ''
                 }`}
               >
                 {item.name}
-              </Link>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 ease-out group-hover:w-full opacity-0 group-hover:opacity-100"></span>
+                <span className="absolute inset-0 -z-10 rounded-lg transition-all duration-300 ease-out opacity-0 group-hover:opacity-20 group-hover:bg-white blur-sm"></span>
+              </button>
             ))}
           </nav>
 
@@ -99,11 +107,8 @@ export default function Header() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <button 
-              onClick={() => {
-                const element = document.getElementById('contact');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="btn-primary bg-white text-gray-900 hover:bg-gray-100"
+              onClick={openContactForm}
+              className="px-4 py-1.5 bg-white text-gray-900 text-sm font-bold rounded-full transition-all hover:scale-105 hover:bg-gray-100"
             >
               Contact Us
             </button>
@@ -111,31 +116,35 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mt-4 rounded-xl border border-white/10 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
+        <div className={`md:hidden mt-4 rounded-2xl border border-white/10 backdrop-blur-md shadow-[0_4px_24px_rgb(0,0,0,0.15)] ${
           isScrolled ? 'bg-gray-900/75' : 'bg-gray-800/50'
         } ${
           isMobileMenuOpen ? 'block' : 'hidden'
         }`}>
           <nav className="py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-medium px-4 py-2 rounded-lg transition-colors text-gray-200 hover:text-white hover:bg-white/5 ${
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  const element = document.getElementById(item.href.slice(1));
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className={`font-medium px-4 py-2 rounded-lg relative group transition-colors text-gray-200 hover:text-white ${
                   activeSection === item.href.slice(1) ? 'text-white' : ''
                 }`}
               >
                 {item.name}
-              </Link>
+                <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white transition-all duration-300 ease-out scale-x-0 group-hover:scale-x-100 opacity-0 group-hover:opacity-100"></span>
+                <span className="absolute inset-0 -z-10 rounded-lg transition-all duration-300 ease-out opacity-0 group-hover:opacity-20 group-hover:bg-white blur-sm"></span>
+              </button>
             ))}
             <button 
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                const element = document.getElementById('contact');
-                element?.scrollIntoView({ behavior: 'smooth' });
+                openContactForm();
               }}
-              className="btn-primary mx-4 bg-white text-gray-900 hover:bg-gray-100"
+              className="mx-4 px-4 py-1.5 bg-white text-gray-900 text-sm font-bold rounded-full transition-all hover:scale-105 hover:bg-gray-100"
             >
               Contact Us
             </button>

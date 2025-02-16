@@ -1,41 +1,37 @@
-import type { Metadata, Viewport } from 'next';
-import { Outfit, Inter } from 'next/font/google';
+'use client';
 import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { Caveat } from 'next/font/google';
+import Header from './components/layout/Header';
+import { ContactFormProvider } from './components/providers/ContactFormProvider';
+import { ToastContainer } from 'react-toastify';
 
-// Font optimization
-const outfit = Outfit({
+const caveat = Caveat({
   subsets: ['latin'],
-  variable: '--font-outfit',
-  display: 'swap',
+  weight: ['700'],
+  variable: '--font-caveat',
 });
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-export const metadata: Metadata = {
-  title: 'Vidsource – Your Ultimate Video Production Partner',
-  description: 'Professional video editing and production services for YouTube content creators.',
-  metadataBase: new URL('http://localhost:3001'),
-};
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`scroll-smooth ${outfit.variable} ${inter.variable}`}>
-      <body className={`${inter.className} antialiased`}>
-        {children}
+    <html lang="en">
+      <body className={caveat.variable}>
+        <ContactFormProvider>
+          <Header />
+          <main>{children}</main>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+        </ContactFormProvider>
       </body>
     </html>
   );
