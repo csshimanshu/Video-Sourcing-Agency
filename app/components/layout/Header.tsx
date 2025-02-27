@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useContactForm } from '../providers/ContactFormProvider';
 
 const navItems = [
+  { name: 'Home', href: '#home' },
   { name: 'Services', href: '#services' },
   { name: 'Portfolio', href: '#portfolio' },
   { name: 'Testimonials', href: '#testimonials' },
@@ -42,7 +43,7 @@ export default function Header() {
   const { openContactForm } = useContactForm();
 
   return (
-    <header className="fixed w-full z-50 px-4" style={{ top: '1rem' }}>
+    <header className="fixed w-full z-[100] px-4" style={{ top: '1rem' }}>
       <div className={`container mx-auto px-6 py-2 rounded-3xl border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgb(0,0,0,0.2)] ${
         isScrolled ? 'bg-gray-900/75' : 'bg-gray-800/50'
       }`}>
@@ -63,7 +64,7 @@ export default function Header() {
                   const element = document.getElementById(item.href.slice(1));
                   element?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className={`font-medium relative transition-all text-gray-200 hover:text-white group ${
+                className={`font-medium relative transition-all text-gray-200 hover:text-white group text-[16px] font-['-apple-system',system-ui,sans-serif] ${
                   activeSection === item.href.slice(1) ? 'text-white' : ''
                 }`}
               >
@@ -130,7 +131,7 @@ export default function Header() {
                   const element = document.getElementById(item.href.slice(1));
                   element?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className={`font-medium px-4 py-2 rounded-lg relative group transition-colors text-gray-200 hover:text-white ${
+                className={`font-medium px-4 py-2 rounded-lg relative group transition-colors text-gray-200 hover:text-white text-[16px] font-['-apple-system',system-ui,sans-serif] ${
                   activeSection === item.href.slice(1) ? 'text-white' : ''
                 }`}
               >

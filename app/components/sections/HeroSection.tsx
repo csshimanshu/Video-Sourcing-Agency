@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useContactForm } from '../providers/ContactFormProvider';
-import StatCounter from './StatCounter';
+import RotatingText from './RotatingText';
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,33 +10,22 @@ export default function HeroSection() {
 
   useEffect(() => {
     setIsVisible(true);
+    // Scroll to hero section on initial load
+    const element = document.getElementById('home');
+    if (element) {
+      element.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-700 to-indigo-900 overflow-hidden">
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50"></div>
-        
-        {/* Animated pattern */}
-        <div className="absolute inset-0 opacity-10 animate-float">
-          <div 
-            className="absolute inset-0 bg-repeat bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPjwvZz48L3N2Zz4=')]"
-          ></div>
-        </div>
-      </div>
+    <section id="home" className="relative min-h-screen w-full flex items-center justify-center">
+      {/* Dark overlay */}
+      <div className="absolute inset-0 w-full h-full"></div>
       
       {/* Content */}
-      {/* Decorative shapes */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
-      </div>
-
       <div className={`container mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
         <div className="space-y-8 md:space-y-10">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight relative">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[100%] mb-6 leading-tight relative">
             Elevate Your{' '}
             <span className="text-blue-400 inline-flex items-center mb-[1rem]">
               <img 
@@ -47,10 +36,12 @@ export default function HeroSection() {
             </span><br />
             with Vidsource
           </h1>
-          <p className="font-handwriting text-2xl md:text-3xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Professional video editing that helps you stand out.<br />
-            Unleash your creativity while we handle the rest.
-          </p>
+          <div className="text-xl md:text-2xl leading-normal lg:text-[24px] text-gray-200 mb-8 max-w-3xl mx-auto leading-normal font-asap-condensed">
+            <div className="inline">Professional </div>
+            <RotatingText />
+            <div className="inline"> that helps you stand out.</div>
+            <div className="mt-4">Unleash your creativity while we handle the rest.</div>
+          </div>
           <div className="relative">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button 
@@ -64,14 +55,6 @@ export default function HeroSection() {
                 <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500/20 to-indigo-500/20 blur transition-all duration-300 group-hover:blur-md opacity-0 group-hover:opacity-100"></div>
               </button>
             </div>
-          </div>
-          
-          {/* Stats */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-white max-w-4xl mx-auto">
-            <StatCounter value={500} suffix="+" label="Videos Edited" />
-            <StatCounter value={100} suffix="+" label="Happy Creators" />
-            <StatCounter value={24} suffix="/7" label="Support" />
-            <StatCounter value={100} suffix="%" label="Satisfaction" />
           </div>
         </div>
       </div>

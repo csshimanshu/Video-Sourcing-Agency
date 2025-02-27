@@ -24,6 +24,7 @@ const config: Config = {
         outfit: ['var(--font-outfit)'],
         inter: ['var(--font-inter)'],
         handwriting: ['var(--font-caveat)'],
+        'asap-condensed': ['var(--font-asap-condensed)'],
       },
       keyframes: {
         float: {
@@ -33,9 +34,20 @@ const config: Config = {
           '60%': { transform: 'translate(-5px, -10px)' },
           '80%': { transform: 'translate(10px, 5px)' },
         },
+        'gradient-x': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
+        }
       },
       animation: {
         'float': 'float 20s ease-in-out infinite',
+        'gradient-x': 'gradient-x 15s ease infinite'
       },
     },
   },

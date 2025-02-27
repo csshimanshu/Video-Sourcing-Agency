@@ -1,55 +1,49 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
 
-interface CounterAnimationProps {
-  endValue: number;
-  duration?: number;
-  suffix?: string;
-}
-
-export default function useCounterAnimation({ endValue, duration = 2000, suffix = '' }: CounterAnimationProps) {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
+export default function useCounterAnimation(end: number, duration: number = 1500): number {
+  const [count, setCount] = useState<number>(0);
+  const frameRef = useRef<number>(0);
+  const startTimeRef = useRef<number>(0);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated.current) {
-          setIsVisible(true);
-          hasAnimated.current = true;
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    // Reset count when end changes to 0
+    if (end === 0) {
+      setCount(0);
+      return;
     }
 
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const steps = 60;
-    const increment = endValue / steps;
-    const stepDuration = duration / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= endValue) {
-        setCount(endValue);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
+    const animate = (currentTime: number): void => {
+      if (!startTimeRef.current) {
+        startTimeRef.current = currentTime;
       }
-    }, stepDuration);
 
-    return () => clearInterval(timer);
-  }, [isVisible, endValue, duration]);
+      const elapsedTime = currentTime - startTimeRef.current;
+      const progress = Math.min(elapsedTime / duration, 1);
 
-  return { count, elementRef, displayValue: `${count}${suffix}` };
+      // Easing function for smooth animation
+      const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
+      const easedProgress = easeOutQuart(progress);
+
+      setCount(Math.floor(easedProgress * end));
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(animate);
+      } else {
+        setCount(end); // Ensure we hit the exact end number
+      }
+    };
+
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+      startTimeRef.current = 0;
+    };
+  }, [end, duration]);
+
+  return count;
 }

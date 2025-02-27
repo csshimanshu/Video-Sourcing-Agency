@@ -9,13 +9,13 @@
 
 @layer base {
   html {
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto;
   }
 
   body {
-    @apply bg-white text-gray-900;
+    @apply text-gray-300;
+    background: linear-gradient(130deg, #0B0E13 0%, #1C1F26 50%, #13151C 100%);
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
