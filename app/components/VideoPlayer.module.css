@@ -1,0 +1,211 @@
+.thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.thumbnail:hover::after {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.thumbnail:hover {
+  transform: scale(1.02);
+}
+
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 80px;
+  height: 80px;
+  background: rgba(37, 99, 235, 0.9);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail:hover .playButton {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(37, 99, 235, 1);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+}
+
+.playIcon {
+  width: 32px;
+  height: 32px;
+  color: white;
+  margin-left: 4px; /* Offset for the triangle shape */
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  padding: 2rem;
+}
+
+.modal {
+  position: relative;
+  width: 95vw;
+  max-width: 1600px;
+  height: auto;
+  aspect-ratio: 16/9;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 1.5rem;
+  padding: 0;
+  animation: zoomIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 80px rgba(37, 99, 235, 0.4);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.navButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prevButton {
+  left: 1rem;
+}
+
+.nextButton {
+  right: 1rem;
+}
+
+.navIcon {
+  width: 32px;
+  height: 32px;
+}
+
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.videoFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .modalOverlay {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .modalOverlay {
+    padding: 0;
+  }
+
+  .modal {
+    width: 95vw;
+    padding: 0.5rem;
+  }
+
+  .closeButton {
+    top: -36px;
+    right: 0;
+  }
+}
